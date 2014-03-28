@@ -20,7 +20,6 @@ var sizes = [
 		key: 'lg',
 		val: 960
 	},
-
 	{
 		key: 'max',
 		val: 1760
