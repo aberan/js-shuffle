@@ -5,13 +5,14 @@ define(function(require){
 	require('throttle-debounce');
 	require('enquire.min');
 
-	function Shuffle($unit, $dest, sizes) {
+	function Shuffle($unit, $dest, sizes, cb) {
 		this.dest = {};
 		this.$unit = $unit;
 		this.$dest = $dest;
 		this.last = null;
 		this.curr = null;
 		this.walker = null;
+		this.cb = typeof cb !== 'undefined' && typeof cb === 'function' ? cb : false;
 
 		//sort queries by size ascending
 		var queries = sizes;
@@ -134,6 +135,11 @@ define(function(require){
 							case 'prepend':
 								$el.prepend($this);
 								break;
+						}
+						
+						//execute callback if defined
+						if( that.cb ) {
+							that.cb( $this, unit, valid_mq );
 						}
 					}
 				});
